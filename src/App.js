@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React from 'react'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import GlobalStyle from './styles/GlobalStyle'
+import { store } from './redux/store'
+import Navbar from './components/Navbar'
+import Homepage from './Pages/Homepage'
+import Productpage from './Pages/Productpage'
+import Cartpage from './Pages/Cartpage'
+import Checkoutpage from './Pages/Checkoutpage'
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Provider store={store}>
+      <Router>
+        <GlobalStyle />
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route path='/product/:id' element={<Productpage />} />
+          <Route path='/cart' element={<Cartpage />} />
+          <Route path='/checkout' element={<Checkoutpage />} />
+        </Routes>
+      </Router>
+    </Provider>
+  )
 }
 
-export default App;
+export default App
